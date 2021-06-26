@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Azure Storage Optimizer | Azure Developer League Hackathon 2021</title>
+		
+		<!-- WEB FONTS -->
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		
+		<!-- BOOTSTRAP -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!-- FONT AWESOME -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<!-- CUSTOM STYLING -->
+		<link href="css/styles.css" rel="stylesheet">
+		<!-- PRELOADER -->	
+		<link href="css/loader.css" rel="stylesheet">
+		
+		
+		<link rel="stylesheet" href="css/rzslider.css" />
+		<link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<script data-require="angular.js@1.6.0" data-semver="1.6.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.js"></script>
+		<script data-require="ui-bootstrap@*" data-semver="2.2.0" src="https://cdn.rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-2.2.0.js"></script>
+		<script src="js/rzslider.js"></script>
+		<script src="js/script.js"></script>
+	</head>
+	
+<body ng-app="dateRangeDemo" ng-controller="dateRangeCtrl">
+	<!-- HEADER -->
+		<section id="header_main" style="padding:0px" class="col-md-12">
+			<div class="container" style="width:100%">
+				<nav class="navbar navbar-light bg-light" style="margin:1%;text-align:right;">
+				  <span class="navbar-brand float-left" style="font-size:30px;line-height:normal">Azure Storage Optimizer</span>
+				  <span class="float-right"><img src="images/msft_logo.png" width="20%" alt="Microsoft"></span>
+				</nav>
+				<hr>
+			</div>
+		</section>
+	<!-- HEADER ENDS -->
+	
+	<!-- REPORT -->
+	
+		<section id="report" style="padding:20px 0px 40px 0px">
+			<div class="container" style="width:100%">
+				<div class="row text-center">
+					<div class="col-md-9">
+						<iframe width="105%" height="500" src="https://app.powerbi.com/view?r=eyJrIjoiM2I1ZGRiOWYtZmIyMi00ODVjLWI2YjgtYmJmZDFiYjExODJmIiwidCI6IjRmZDM1NGNiLWU2OWQtNDlmNi1iOTU0LWRhZjkzZDVjZWY5NSIsImMiOjZ9" frameborder="0" allowFullScreen="true"></iframe>
+					</div>
+					<div class="col-md-3">
+						<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" style="width:70%;height:40px;background-color:#ffffff;color:#337ab7;" type="button" data-toggle="dropdown">
+							<span id="selectedcontainer">Select Container</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<span class="caret">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						  </button>
+						  <ul class="dropdown-menu containers">
+							<li><a href="#">All Containers</a></li>
+							<li class="divider"></li>
+							<li><a href="#">thenightowls</a></li>
+							<li><a href="#">thetechietribe</a></li>
+							<li><a href="#">jarvis</a></li>
+							<li><a href="#">azure-webjobs-hosts</a></li>
+							<li><a href="#">azure-webjobs-secrets</a></li>
+						  </ul>
+						</div>
+						<br>
+						<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" style="width:70%;height:40px;background-color:#ffffff;color:#337ab7;" type="button" data-toggle="dropdown">
+							<span id="filetype">Select File Type</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<span class="caret">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						  </button>
+						  <ul class="dropdown-menu filetype">
+							<li><a href="#">All Files</a></li>
+							<li class="divider"></li>
+							<li><a href="#">csv</a></li>
+							<li><a href="#">xlsx</a></li>
+							<li><a href="#">parquet</a></li>
+							<li><a href="#">txt</a></li>
+							<li><a href="#">avro</a></li>
+						  </ul>
+						</div>
+						<br>
+						<div style="float:left;margin-left:17%">
+							<p style="float:left;font-size:17px;margin-bottom:0px;color:gray;">Files not accessed between</p>
+							<rzslider 
+							  rz-slider-model="dateRangeSlider.minValue" 
+							  rz-slider-high="dateRangeSlider.maxValue" 
+							  rz-slider-options="dateRangeSlider.options">
+							</rzslider>
+							<p style="float:left;font-size:17px;margin-bottom:0px;color:gray;">Files not modified between</p>
+							<rzslider 
+							  rz-slider-model="dateRangeSlider.minValue" 
+							  rz-slider-high="dateRangeSlider.maxValue" 
+							  rz-slider-options="dateRangeSlider.options">
+							</rzslider>
+						</div>
+						<br>
+						<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" style="width:70%;height:40px;background-color:#ffffff;color:#337ab7;" type="button" data-toggle="dropdown">
+							<span id="movefrom">Move From</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<span class="caret">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						  </button>
+						  <ul class="dropdown-menu movefrom">
+							<li><a href="#">Hot Tier</a></li>
+							<li><a href="#">Cool Tier</a></li>
+							<li><a href="#">Archive Tier</a></li>
+						  </ul>
+						</div>
+						<br>
+						<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" style="width:70%;height:40px;background-color:#ffffff;color:#337ab7;" type="button" data-toggle="dropdown">
+							<span id="moveto">Move To</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<span class="caret">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						  </button>
+						  <ul class="dropdown-menu moveto">
+							<li><a href="#">Hot Tier</a></li>
+							<li><a href="#">Cool Tier</a></li>
+							<li><a href="#">Archive Tier</a></li>
+						  </ul>
+						</div>
+						<hr>
+						<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" onclick='DisplayExecutingMessage()' style="width:70%;height:40px;" type="button" data-toggle="dropdown">
+							Move
+						  </button>
+						</div>
+					</div>
+				</div>
+				<span id='loading-section' style='display: none;'>
+				<img src="images/loader.gif" class="fa fa-spinner fa-spin fa-fw" style="width:9%;margin-top:-25%;margin-left:33%;position:absolute;z-index:1;" alt="Azure Developer League Hackathon 2021">
+				<h3><b style="width:21%;margin-top:-16%;margin-left:28%;position:absolute;z-index:1;">Moving Files</b></h3>
+				</span>
+				
+			</div>
+		</section>
+	<!-- REPORT ENDS -->
+	
+	
+	<!-- FOOTER -->
+		<footer id="footer">
+			<div class="container">
+				<div class="row text-center">	
+					<p>
+						&copy; The Night Owls | Designed For <a href="https://www.hackerearth.com/challenges/hackathon/azure-developer-league-hackathon/">Azure Developer League Hackathon 2021</a>
+						<span class="social">
+							<a href="#"><i class="fa fa-facebook-square"></i></a>
+							<a href="#"><i class="fa fa-twitter-square"></i></a> 
+							<a href="#"><i class="fa fa-linkedin-square"></i></a>
+						</span>
+					</p>
+				</div>
+			</div>		
+		</footer>
+	<!-- FOOTER ENDS -->	
+				
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- SMOOTH SCROLL -->
+		<script src="js/smooth-scroll.min.js"></script>
+		<!-- PARALLAX IMG -->
+		<script src="js/jquery.parallax-1.1.3.js"></script>
+		<!-- SCROLL REVEAL -->
+		<script src="js/scrollReveal.min.js"></script>
+		<!-- FUNCTIONS -->
+		<script src="js/functions.js"></script>
+		<script>
+			$('.containers a').click(function(){
+			$('#selectedcontainer').text($(this).text());
+		  });
+		  
+			$('.moveto a').click(function(){
+			$('#moveto').text($(this).text());
+		  });
+		  
+			$('.movefrom a').click(function(){
+			$('#movefrom').text($(this).text());
+		  });
+			
+			$('.filetype a').click(function(){
+			$('#filetype').text($(this).text());
+		  });
+		  
+		   function DisplayExecutingMessage() {
+			  document.getElementById('loading-section').style.display = 'inline-block';
+			  // Hide it after 5 seconds
+			  setInterval(function(){
+				document.getElementById('loading-section').style.display = 'block';
+				// Display your label here
+				document.getElementById('loading-section').innerHTML = '<h3><b style="width:21%;margin-top:-16%;margin-left:28%;position:absolute;z-index:1;">Files Moved!</b></h3>';
+				setTimeout(function(){ location.reload(); }, 3000);
+				
+			  },5000);
+			}
+		</script>
+</body>
+</html>
